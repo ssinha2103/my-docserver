@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table of Contents</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar for Table of Contents -->
+        <div class="sidebar">
+            <h2>Table of Contents</h2>
+            <ul class="toc-list">
+                {% for section in toc %}
+                    {% if section.folder %}
+                    <li class="toc-section">{{ section.folder }} <span class="toggle-icon">+</span></li>
+                    {% endif %}
+                    <ul class="toc-nested">
+                        {% for title, filepath in section.files %}
+                        <li>
+                            <a href="{{ url_for('serve_docs', filepath=filepath) }}">{{ title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content">
+            <h1>Welcome to the Documentation</h1>
+            <p>Select a section from the table of contents to view the documentation.</p>
+        </div>
+    </div>
+
+    <!-- Include the JS file -->
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
